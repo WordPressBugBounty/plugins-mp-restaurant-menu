@@ -3,10 +3,11 @@
  * Plugin Name: Restaurant Menu
  * Plugin URI: https://motopress.com/products/restaurant-menu/
  * Description: This plugin gives you the power to effectively create, maintain and display online menus for almost any kind of restaurant, cafes and other typical food establishments.
- * Version: 2.4.12
+ * Version: 2.4.13
  * Author: MotoPress
  * Author URI: https://motopress.com
  * License: GPLv2 or later
+ * Requires PHP: 7.4
  * Text Domain: mp-restaurant-menu
  * Domain Path: /languages
  */
@@ -117,6 +118,12 @@ class MP_Restaurant_Menu_Setup_Plugin {
 		 * Include Module
 		 */
 		require_once MP_RM_CLASSES_PATH . 'class-module.php';
+		/**
+		 * Include the widget module before Core::init_plugin() uses it.
+		 * Module::install() loads module files too, but Core cannot call a
+		 * static method on MPRM_Widget until that class has been declared.
+		 */
+		require_once MP_RM_MODULES_PATH . 'class-mprm-widget.php';
 		/**
 		 * Include view
 		 */
